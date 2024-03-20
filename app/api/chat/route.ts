@@ -1,6 +1,12 @@
 import { kv } from '@vercel/kv'
-import { OpenAIStream, StreamingTextResponse } from 'ai'
+import { OpenAIStream, AnthropicStream, StreamingTextResponse } from 'ai'
 import { Configuration, OpenAIApi } from 'openai-edge'
+import Anthropic from '@anthropic-ai/sdk';
+ 
+// Create an Anthropic API client (that's edge friendly)
+const anthropic = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY || '',
+})
 
 import { auth } from '@/auth'
 import { nanoid } from '@/lib/utils'
@@ -28,14 +34,21 @@ export async function POST(req: Request) {
     configuration.apiKey = previewToken
   }
 
-  const res = await openai.createChatCompletion({
-    model: 'gpt-3.5-turbo',
+  // const res = await openai.createChatCompletion({
+  //   model: 'gpt-3.5-turbo',
+  //   messages,
+  //   temperature: 0.7,
+  //   stream: true
+  // })
+
+  const res = anthropic.messages.create({
+    model: 'claude-3-opus-20240229',
     messages,
-    temperature: 0.7,
+    max_tokens: 1024,
     stream: true
   })
 
-  const stream = OpenAIStream(res, {
+  const stream = AnthropicStream(res, {
     async onCompletion(completion) {
       const title = json.messages[0].content.substring(0, 100)
       const id = json.id ?? nanoid()
