@@ -13,8 +13,7 @@ export function FooterText({ className, ...props }: React.ComponentProps<'p'>) {
       {...props}
     >
       Open source social innovation AI chatbot built by{' '}
-      <ExternalLink href="https://today.design.org">Today</ExternalLink>
-      .
+      <ExternalLink href="https://today.design">Today</ExternalLink>.
     </p>
   )
 }

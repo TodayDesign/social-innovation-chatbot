@@ -6,7 +6,7 @@ import { IconArrowRight } from '@/components/ui/icons'
 
 const exampleMessages = [
   {
-    heading: 'Explain genral concepts',
+    heading: 'Explain general concepts',
     message: `What is a "social innovation"?`
   },
   {
@@ -28,8 +28,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
         </h1>
         <p className="mb-2 leading-normal text-muted-foreground">
           This is an AI experiment built by{' '}
-          <ExternalLink href="https://today.design">Today</ExternalLink>
-          .
+          <ExternalLink href="https://today.design">Today</ExternalLink>.
         </p>
         <p className="leading-normal text-muted-foreground">
           You can start your exploration here or try the following examples:
