@@ -44,8 +44,7 @@ export async function POST(req: Request) {
   const res = anthropic.messages.stream({
     model: 'claude-3-opus-20240229',
     messages,
-    max_tokens: 1024,
-    stream: true
+    max_tokens: 1024
   })
 
   const stream = AnthropicStream(res, {
